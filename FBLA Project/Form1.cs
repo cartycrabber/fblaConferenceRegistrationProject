@@ -22,12 +22,16 @@ namespace FBLA_Project
         string participantsFile = @"\PARTICIPANTS.txt";
         string workshopsFile = @"\WORKSHOPS.txt";
         string workshopRegistrationsFile = @"\WKSHP_REGISTRATIONS.txt";
+        string[] conferences = { "Test Conference 1", "Test Conference 2", "Test Conference 3" };
+        string[] participantTypes = { "Member", "Advisor", "Guest" };
 
         #endregion
 
         public Form1()
         {
             InitializeComponent();
+            conferencesComboBox.Items.AddRange(conferences);
+            typeComboBox.Items.AddRange(participantTypes);
             if (!Directory.Exists(dataFolder))
             {
                 Directory.CreateDirectory(dataFolder);
@@ -56,14 +60,14 @@ namespace FBLA_Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-            writeParticipant();
+            writeParticipant(firstNameTextBox.Text, lastNameTextBox.Text, conferencesComboBox.Text, typeComboBox.Text);
         }
 
-        private void writeParticipant()
+        private void writeParticipant(string firstName, string lastName, string conference, string participantType)
         {
             using (System.IO.StreamWriter participants = new System.IO.StreamWriter(Application.StartupPath + @"\Data\PARTICIPANTS.txt", true))
             {
-                participants.WriteLine("This is a test");
+                participants.WriteLine(firstName + ", " + lastName + ", " + conference + ", " + participantType);
             }
         }
     }

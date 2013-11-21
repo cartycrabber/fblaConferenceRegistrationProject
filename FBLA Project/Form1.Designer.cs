@@ -28,34 +28,65 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.enterButton = new System.Windows.Forms.Button();
+            this.firstNameTextBox = new System.Windows.Forms.TextBox();
+            this.lastNameTextBox = new System.Windows.Forms.TextBox();
+            this.conferencesComboBox = new System.Windows.Forms.ComboBox();
+            this.typeComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // button1
+            // enterButton
             // 
-            this.button1.Location = new System.Drawing.Point(183, 248);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.enterButton.Location = new System.Drawing.Point(400, 416);
+            this.enterButton.Name = "enterButton";
+            this.enterButton.Size = new System.Drawing.Size(110, 34);
+            this.enterButton.TabIndex = 0;
+            this.enterButton.Text = "Enter Information";
+            this.enterButton.UseVisualStyleBackColor = true;
+            this.enterButton.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox1
+            // firstNameTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(13, 185);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(459, 20);
-            this.textBox1.TabIndex = 1;
+            this.firstNameTextBox.Location = new System.Drawing.Point(12, 336);
+            this.firstNameTextBox.Name = "firstNameTextBox";
+            this.firstNameTextBox.Size = new System.Drawing.Size(231, 20);
+            this.firstNameTextBox.TabIndex = 1;
+            this.firstNameTextBox.Text = "First Name";
+            // 
+            // lastNameTextBox
+            // 
+            this.lastNameTextBox.Location = new System.Drawing.Point(249, 336);
+            this.lastNameTextBox.Name = "lastNameTextBox";
+            this.lastNameTextBox.Size = new System.Drawing.Size(231, 20);
+            this.lastNameTextBox.TabIndex = 2;
+            this.lastNameTextBox.Text = "Last Name";
+            // 
+            // conferencesComboBox
+            // 
+            this.conferencesComboBox.FormattingEnabled = true;
+            this.conferencesComboBox.Location = new System.Drawing.Point(486, 336);
+            this.conferencesComboBox.Name = "conferencesComboBox";
+            this.conferencesComboBox.Size = new System.Drawing.Size(182, 21);
+            this.conferencesComboBox.TabIndex = 3;
+            // 
+            // typeComboBox
+            // 
+            this.typeComboBox.FormattingEnabled = true;
+            this.typeComboBox.Location = new System.Drawing.Point(675, 336);
+            this.typeComboBox.Name = "typeComboBox";
+            this.typeComboBox.Size = new System.Drawing.Size(186, 21);
+            this.typeComboBox.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 462);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(984, 462);
+            this.Controls.Add(this.typeComboBox);
+            this.Controls.Add(this.conferencesComboBox);
+            this.Controls.Add(this.lastNameTextBox);
+            this.Controls.Add(this.firstNameTextBox);
+            this.Controls.Add(this.enterButton);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -65,8 +96,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button enterButton;
+        private System.Windows.Forms.TextBox firstNameTextBox;
+        private System.Windows.Forms.TextBox lastNameTextBox;
+        private System.Windows.Forms.ComboBox conferencesComboBox;
+        private System.Windows.Forms.ComboBox typeComboBox;
     }
 }
 
