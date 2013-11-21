@@ -17,7 +17,11 @@ namespace FBLA_Project
         #region Variables
 
         string dataFolder = Application.StartupPath + @"\Data";
+        string conferencesFile = @"\CONFERENCES.txt";
+        string typeFile = @"\TYPE.txt";
         string participantsFile = @"\PARTICIPANTS.txt";
+        string workshopsFile = @"\WORKSHOPS.txt";
+        string workshopRegistrationsFile = @"\WKSHP_REGISTRATIONS.txt";
 
         #endregion
 
@@ -28,12 +32,26 @@ namespace FBLA_Project
             {
                 Directory.CreateDirectory(dataFolder);
             }
+            if (!File.Exists(dataFolder + conferencesFile))
+            {
+                File.Create(dataFolder + conferencesFile).Close();
+            }
+            if (!File.Exists(dataFolder + typeFile))
+            {
+                File.Create(dataFolder + typeFile).Close();
+            }
             if (!File.Exists(dataFolder + participantsFile))
             {
                 File.Create(dataFolder + participantsFile).Close();
             }
-//            Directory.CreateDirectory(dataFolder);
-//            File.Create(dataFolder + participantsFile);
+            if (!File.Exists(dataFolder + workshopsFile))
+            {
+                File.Create(dataFolder + workshopsFile).Close();
+            }
+            if (!File.Exists(dataFolder + workshopRegistrationsFile))
+            {
+                File.Create(dataFolder + workshopRegistrationsFile).Close();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
