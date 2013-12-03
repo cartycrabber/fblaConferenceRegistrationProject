@@ -16,22 +16,38 @@ namespace FBLA_Project
 
         #region Variables
 
-        string dataFolder = Application.StartupPath + @"\Data";
-        string conferencesFile = @"\CONFERENCES.txt";
-        string typeFile = @"\TYPE.txt";
-        string participantsFile = @"\PARTICIPANTS.txt";
-        string workshopsFile = @"\WORKSHOPS.txt";
-        string workshopRegistrationsFile = @"\WKSHP_REGISTRATIONS.txt";
-        string[] conferences = { "Test Conference 1", "Test Conference 2", "Test Conference 3" };
-        string[] participantTypes = { "Member", "Advisor", "Guest" };
+        static string dataFolder = Application.StartupPath + @"\Data";
+        static string conferencesFile = @"\CONFERENCES.txt";
+        static string typeFile = @"\TYPE.txt";
+        static string participantsFile = @"\PARTICIPANTS.txt";
+        static string workshopsFile = @"\WORKSHOPS.txt";
+        static string workshopRegistrationsFile = @"\WKSHP_REGISTRATIONS.txt";
+        static string[] conferences = File.ReadAllLines(dataFolder + conferencesFile);
+        static string[] participantTypes = File.ReadAllLines(dataFolder + typeFile);
+        List<string> conferenceInfoList = new List<string>();
+        List<string> conferenceNameList = new List<string>();
+        List<string> typeList = new List<string>();
+        List<string> typeDescList = new List<string>();
 
         #endregion
 
         public Form1()
         {
             InitializeComponent();
-            conferencesComboBox.Items.AddRange(conferences);
-            typeComboBox.Items.AddRange(participantTypes);
+            foreach (var conference in conferences)
+            {
+                string[] splitConference = conference.Split(',');
+                conferenceInfoList.AddRange(splitConference);
+                conferenceNameList.Add(splitConference[1]);
+            }
+            foreach (var type in participantTypes)
+            {
+                string[] splitType = type.Split(',');
+                typeList.AddRange(splitType);
+                typeDescList.Add(splitType[1]);
+            }
+            conferencesComboBox.Items.AddRange(conferenceNameList.ToArray());    
+            typeComboBox.Items.AddRange(typeDescList.ToArray());
             if (!Directory.Exists(dataFolder))
             {
                 Directory.CreateDirectory(dataFolder);

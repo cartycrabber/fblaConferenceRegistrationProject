@@ -68,6 +68,7 @@
             this.conferencesComboBox.Name = "conferencesComboBox";
             this.conferencesComboBox.Size = new System.Drawing.Size(182, 21);
             this.conferencesComboBox.TabIndex = 3;
+            this.conferencesComboBox.Text = "Conference";
             // 
             // typeComboBox
             // 
@@ -76,6 +77,7 @@
             this.typeComboBox.Name = "typeComboBox";
             this.typeComboBox.Size = new System.Drawing.Size(186, 21);
             this.typeComboBox.TabIndex = 4;
+            this.typeComboBox.Text = "Type";
             // 
             // Form1
             // 
