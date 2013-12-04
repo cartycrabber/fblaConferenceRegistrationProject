@@ -76,7 +76,15 @@ namespace FBLA_Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-            writeParticipant(firstNameTextBox.Text, lastNameTextBox.Text, conferencesComboBox.Text, typeComboBox.Text);
+            if (firstNameTextBox.Text != "First Name" && lastNameTextBox.Text != "Last Name" && conferencesComboBox.Text != "Conference" && typeComboBox.Text != "Type")
+            {
+                
+                writeParticipant(firstNameTextBox.Text, lastNameTextBox.Text, conferencesComboBox.Text, typeComboBox.Text);
+            }
+            else
+            {
+                MessageBox.Show("Please fill in all fields", "Error");
+            }
         }
 
         private void writeParticipant(string firstName, string lastName, string conference, string participantType)
