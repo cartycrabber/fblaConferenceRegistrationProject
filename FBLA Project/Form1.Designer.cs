@@ -33,6 +33,7 @@
             this.lastNameTextBox = new System.Windows.Forms.TextBox();
             this.conferencesComboBox = new System.Windows.Forms.ComboBox();
             this.typeComboBox = new System.Windows.Forms.ComboBox();
+            this.chaptNumTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // enterButton
@@ -52,6 +53,8 @@
             this.firstNameTextBox.Size = new System.Drawing.Size(231, 20);
             this.firstNameTextBox.TabIndex = 1;
             this.firstNameTextBox.Text = "First Name";
+            this.firstNameTextBox.Enter += new System.EventHandler(this.firstNameTextBox_Enter);
+            this.firstNameTextBox.Leave += new System.EventHandler(this.firstNameTextBox_Leave);
             // 
             // lastNameTextBox
             // 
@@ -60,30 +63,43 @@
             this.lastNameTextBox.Size = new System.Drawing.Size(231, 20);
             this.lastNameTextBox.TabIndex = 2;
             this.lastNameTextBox.Text = "Last Name";
+            this.lastNameTextBox.Enter += new System.EventHandler(this.lastNameTextBox_Enter);
+            this.lastNameTextBox.Leave += new System.EventHandler(this.lastNameTextBox_Leave);
             // 
             // conferencesComboBox
             // 
             this.conferencesComboBox.FormattingEnabled = true;
-            this.conferencesComboBox.Location = new System.Drawing.Point(486, 336);
+            this.conferencesComboBox.Location = new System.Drawing.Point(598, 335);
             this.conferencesComboBox.Name = "conferencesComboBox";
             this.conferencesComboBox.Size = new System.Drawing.Size(182, 21);
-            this.conferencesComboBox.TabIndex = 3;
+            this.conferencesComboBox.TabIndex = 4;
             this.conferencesComboBox.Text = "Conference";
             // 
             // typeComboBox
             // 
             this.typeComboBox.FormattingEnabled = true;
-            this.typeComboBox.Location = new System.Drawing.Point(675, 336);
+            this.typeComboBox.Location = new System.Drawing.Point(786, 336);
             this.typeComboBox.Name = "typeComboBox";
             this.typeComboBox.Size = new System.Drawing.Size(186, 21);
-            this.typeComboBox.TabIndex = 4;
+            this.typeComboBox.TabIndex = 5;
             this.typeComboBox.Text = "Type";
+            // 
+            // chaptNumTextBox
+            // 
+            this.chaptNumTextBox.Location = new System.Drawing.Point(487, 335);
+            this.chaptNumTextBox.Name = "chaptNumTextBox";
+            this.chaptNumTextBox.Size = new System.Drawing.Size(105, 20);
+            this.chaptNumTextBox.TabIndex = 3;
+            this.chaptNumTextBox.Text = "Chapter #";
+            this.chaptNumTextBox.Enter += new System.EventHandler(this.chaptNumTextBox_Enter);
+            this.chaptNumTextBox.Leave += new System.EventHandler(this.chaptNumTextBox_Leave);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 462);
+            this.Controls.Add(this.chaptNumTextBox);
             this.Controls.Add(this.typeComboBox);
             this.Controls.Add(this.conferencesComboBox);
             this.Controls.Add(this.lastNameTextBox);
@@ -103,6 +119,7 @@
         private System.Windows.Forms.TextBox lastNameTextBox;
         private System.Windows.Forms.ComboBox conferencesComboBox;
         private System.Windows.Forms.ComboBox typeComboBox;
+        private System.Windows.Forms.TextBox chaptNumTextBox;
     }
 }
 

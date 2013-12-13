@@ -24,6 +24,8 @@ namespace FBLA_Project
         static string workshopRegistrationsFile = @"\WKSHP_REGISTRATIONS.txt";
         static string[] conferences = File.ReadAllLines(dataFolder + conferencesFile);
         static string[] participantTypes = File.ReadAllLines(dataFolder + typeFile);
+        static string[] registeredParticipants = File.ReadAllLines(dataFolder + participantsFile);
+        static int lastPartNum = 1;
         List<string> conferenceInfoList = new List<string>();
         List<string> conferenceNameList = new List<string>();
         List<string> typeList = new List<string>();
@@ -34,6 +36,11 @@ namespace FBLA_Project
         public Form1()
         {
             InitializeComponent();
+            foreach (var participant in registeredParticipants)
+            {
+                string[] splitParticipants = participant.Split(',');
+                lastPartNum = Convert.ToInt32(splitParticipants[0]) + 1;
+            }
             foreach (var conference in conferences)
             {
                 string[] splitConference = conference.Split(',');
@@ -78,8 +85,9 @@ namespace FBLA_Project
         {
             if (firstNameTextBox.Text != "First Name" && lastNameTextBox.Text != "Last Name" && conferencesComboBox.Text != "Conference" && typeComboBox.Text != "Type")
             {
-                
-                writeParticipant(firstNameTextBox.Text, lastNameTextBox.Text, conferencesComboBox.Text, typeComboBox.Text);
+                string conferenceID = conferenceInfoList[conferenceInfoList.IndexOf(conferencesComboBox.Text) - 1];
+                string typeID = typeList[typeList.IndexOf(typeComboBox.Text) - 1];
+                writeParticipant(firstNameTextBox.Text, lastNameTextBox.Text, conferenceID, typeID, chaptNumTextBox.Text);
             }
             else
             {
@@ -87,12 +95,49 @@ namespace FBLA_Project
             }
         }
 
-        private void writeParticipant(string firstName, string lastName, string conference, string participantType)
+        private void writeParticipant(string firstName, string lastName, string conference, string participantType, string chaptNum)
         {
             using (System.IO.StreamWriter participants = new System.IO.StreamWriter(Application.StartupPath + @"\Data\PARTICIPANTS.txt", true))
             {
-                participants.WriteLine(firstName + ", " + lastName + ", " + conference + ", " + participantType);
+                participants.WriteLine(lastPartNum + ", " + conference + ", " + participantType + ", " + firstName + ", " + lastName + ", " + chaptNum);
+                lastPartNum++;
             }
+        }
+
+        private void firstNameTextBox_Enter(object sender, EventArgs e)
+        {
+            if (firstNameTextBox.Text == "First Name")
+                firstNameTextBox.Clear();
+        }
+
+        private void lastNameTextBox_Enter(object sender, EventArgs e)
+        {
+            if (lastNameTextBox.Text == "Last Name")
+                lastNameTextBox.Clear();
+        }
+
+        private void chaptNumTextBox_Enter(object sender, EventArgs e)
+        {
+            if (chaptNumTextBox.Text == "Chapter #")
+                chaptNumTextBox.Clear();
+        }
+
+        private void firstNameTextBox_Leave(object sender, EventArgs e)
+        {
+            if (firstNameTextBox.Text == "")
+                firstNameTextBox.Text = "First Name";
+        }
+
+        private void lastNameTextBox_Leave(object sender, EventArgs e)
+        {
+            if (lastNameTextBox.Text == "")
+                lastNameTextBox.Text = "Last Name";
+        }
+
+        private void chaptNumTextBox_Leave(object sender, EventArgs e)
+        {
+            if (chaptNumTextBox.Text == "")
+                chaptNumTextBox.Text = "Chapter #";
         }
     }
 }
