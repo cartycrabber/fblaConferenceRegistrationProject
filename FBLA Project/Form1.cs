@@ -25,11 +25,14 @@ namespace FBLA_Project
         static string[] conferences = File.ReadAllLines(dataFolder + conferencesFile);
         static string[] participantTypes = File.ReadAllLines(dataFolder + typeFile);
         static string[] registeredParticipants = File.ReadAllLines(dataFolder + participantsFile);
+        static String[] workshops = File.ReadAllLines(dataFolder + workshopsFile);
         static int lastPartNum = 1;
         List<string> conferenceInfoList = new List<string>();
         List<string> conferenceNameList = new List<string>();
         List<string> typeList = new List<string>();
         List<string> typeDescList = new List<string>();
+        List<string> workshopList = new List<string>();
+        List<string> workshopNameList = new List<string>();
 
         #endregion
 
@@ -53,8 +56,15 @@ namespace FBLA_Project
                 typeList.AddRange(splitType);
                 typeDescList.Add(splitType[1]);
             }
+            foreach (var workshop in workshops)
+            {
+                string[] splitWorkshop = workshop.Split(',');
+                workshopList.AddRange(splitWorkshop);
+                workshopNameList.Add(splitWorkshop[2]);
+            }
             conferencesComboBox.Items.AddRange(conferenceNameList.ToArray());    
             typeComboBox.Items.AddRange(typeDescList.ToArray());
+            workshopComboBox.Items.AddRange(workshopNameList.ToArray());
             if (!Directory.Exists(dataFolder))
             {
                 Directory.CreateDirectory(dataFolder);

@@ -34,6 +34,8 @@
             this.conferencesComboBox = new System.Windows.Forms.ComboBox();
             this.typeComboBox = new System.Windows.Forms.ComboBox();
             this.chaptNumTextBox = new System.Windows.Forms.TextBox();
+            this.workshopComboBox = new System.Windows.Forms.ComboBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // enterButton
@@ -94,11 +96,32 @@
             this.chaptNumTextBox.Enter += new System.EventHandler(this.chaptNumTextBox_Enter);
             this.chaptNumTextBox.Leave += new System.EventHandler(this.chaptNumTextBox_Leave);
             // 
+            // workshopComboBox
+            // 
+            this.workshopComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.workshopComboBox.FormattingEnabled = true;
+            this.workshopComboBox.Location = new System.Drawing.Point(3, 69);
+            this.workshopComboBox.Name = "workshopComboBox";
+            this.workshopComboBox.Size = new System.Drawing.Size(121, 32);
+            this.workshopComboBox.TabIndex = 6;
+            this.workshopComboBox.Text = "Workshops";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.Location = new System.Drawing.Point(130, 5);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(842, 272);
+            this.richTextBox1.TabIndex = 8;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 462);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.workshopComboBox);
             this.Controls.Add(this.chaptNumTextBox);
             this.Controls.Add(this.typeComboBox);
             this.Controls.Add(this.conferencesComboBox);
@@ -120,6 +143,8 @@
         private System.Windows.Forms.ComboBox conferencesComboBox;
         private System.Windows.Forms.ComboBox typeComboBox;
         private System.Windows.Forms.TextBox chaptNumTextBox;
+        private System.Windows.Forms.ComboBox workshopComboBox;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
