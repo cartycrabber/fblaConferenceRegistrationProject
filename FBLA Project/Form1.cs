@@ -8,10 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace FBLA_Project
 {
-    public partial class Form1 : Form
+    public partial class mainForm : Form
     {
 
         #region Variables
@@ -22,73 +23,93 @@ namespace FBLA_Project
         static string participantsFile = @"\PARTICIPANTS.txt";
         static string workshopsFile = @"\WORKSHOPS.txt";
         static string workshopRegistrationsFile = @"\WKSHP_REGISTRATIONS.txt";
-        static string[] conferences = File.ReadAllLines(dataFolder + conferencesFile);
-        static string[] participantTypes = File.ReadAllLines(dataFolder + typeFile);
-        static string[] registeredParticipants = File.ReadAllLines(dataFolder + participantsFile);
-        static String[] workshops = File.ReadAllLines(dataFolder + workshopsFile);
+        static string[] conferences;
+        static string[] participantTypes;
+        static string[] registeredParticipants;
+        static String[] workshops;
         static int lastPartNum = 1;
         List<string> conferenceInfoList = new List<string>();
         List<string> conferenceNameList = new List<string>();
         List<string> typeList = new List<string>();
         List<string> typeDescList = new List<string>();
-        List<string> workshopList = new List<string>();
+        List<string[]> workshopList = new List<string[]>();
         List<string> workshopNameList = new List<string>();
+        List<string> workshopDescList = new List<string>();
+        List<string[]> chosenWorkshopsList = new List<string[]>();
 
         #endregion
 
-        public Form1()
+        public mainForm()
         {
             InitializeComponent();
-            foreach (var participant in registeredParticipants)
-            {
-                string[] splitParticipants = participant.Split(',');
-                lastPartNum = Convert.ToInt32(splitParticipants[0]) + 1;
-            }
-            foreach (var conference in conferences)
-            {
-                string[] splitConference = conference.Split(',');
-                conferenceInfoList.AddRange(splitConference);
-                conferenceNameList.Add(splitConference[1]);
-            }
-            foreach (var type in participantTypes)
-            {
-                string[] splitType = type.Split(',');
-                typeList.AddRange(splitType);
-                typeDescList.Add(splitType[1]);
-            }
-            foreach (var workshop in workshops)
-            {
-                string[] splitWorkshop = workshop.Split(',');
-                workshopList.AddRange(splitWorkshop);
-                workshopNameList.Add(splitWorkshop[2]);
-            }
-            conferencesComboBox.Items.AddRange(conferenceNameList.ToArray());    
-            typeComboBox.Items.AddRange(typeDescList.ToArray());
-            workshopComboBox.Items.AddRange(workshopNameList.ToArray());
             if (!Directory.Exists(dataFolder))
             {
                 Directory.CreateDirectory(dataFolder);
             }
             if (!File.Exists(dataFolder + conferencesFile))
             {
-                File.Create(dataFolder + conferencesFile).Close();
+                File.WriteAllText(dataFolder + conferencesFile, "//Conference Code, Location, Beginning Date, End Date");
             }
             if (!File.Exists(dataFolder + typeFile))
             {
-                File.Create(dataFolder + typeFile).Close();
+                File.WriteAllText(dataFolder + typeFile, "//Type Code, Type Description");
             }
             if (!File.Exists(dataFolder + participantsFile))
             {
-                File.Create(dataFolder + participantsFile).Close();
+                File.WriteAllText(dataFolder + participantsFile, "//Participant Number, Conference Code, Participant Type, First Name, Last Name, Chapter Number");
             }
             if (!File.Exists(dataFolder + workshopsFile))
             {
-                File.Create(dataFolder + workshopsFile).Close();
+                File.WriteAllText(dataFolder + workshopsFile, "//Workshop Code, Conference Code, Workshop Name, Workshop Description, Workshop Date, Workshop Time");
             }
             if (!File.Exists(dataFolder + workshopRegistrationsFile))
             {
-                File.Create(dataFolder + workshopRegistrationsFile).Close();
+                File.WriteAllText(dataFolder + workshopRegistrationsFile, "//Participant ID, Workshop Code");
             }
+            conferences = File.ReadAllLines(dataFolder + conferencesFile);
+            participantTypes = File.ReadAllLines(dataFolder + typeFile);
+            registeredParticipants = File.ReadAllLines(dataFolder + participantsFile);
+            workshops = File.ReadAllLines(dataFolder + workshopsFile);
+            foreach (var participant in registeredParticipants)
+            {
+                if (!participant.StartsWith("//"))
+                {
+                    string[] splitParticipants = participant.Split(',');
+                    lastPartNum = Convert.ToInt32(splitParticipants[0]) + 1;
+                }
+            }
+            foreach (var conference in conferences)
+            {
+                if (!conference.StartsWith("//"))
+                {
+                    string[] splitConference = conference.Split(',');
+                    conferenceInfoList.AddRange(splitConference);
+                    conferenceNameList.Add(splitConference[1]);
+                }
+            }
+            foreach (var type in participantTypes)
+            {
+                if (!type.StartsWith("//"))
+                {
+                    string[] splitType = type.Split(',');
+                    typeList.AddRange(splitType);
+                    typeDescList.Add(splitType[1]);
+                }
+            }
+            foreach (var workshop in workshops)
+            {
+                if (!workshop.StartsWith("//"))
+                {
+                    string[] splitWorkshop = workshop.Split(',');
+                    splitWorkshop[2] = splitWorkshop[2].Trim();
+                    workshopList.Add(splitWorkshop);
+                    workshopNameList.Add(splitWorkshop[2].Trim());
+                    workshopDescList.Add(splitWorkshop[3]);
+                }
+            }
+            conferencesComboBox.Items.AddRange(conferenceNameList.ToArray());    
+            typeComboBox.Items.AddRange(typeDescList.ToArray());
+            workshopComboBox.Items.AddRange(workshopNameList.ToArray());
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -107,10 +128,20 @@ namespace FBLA_Project
 
         private void writeParticipant(string firstName, string lastName, string conference, string participantType, string chaptNum)
         {
-            using (System.IO.StreamWriter participants = new System.IO.StreamWriter(Application.StartupPath + @"\Data\PARTICIPANTS.txt", true))
+            using (System.IO.StreamWriter workshops = new System.IO.StreamWriter(dataFolder + workshopRegistrationsFile, true))
+            {
+                foreach (var chosen in chosenWorkshopsList)
+                {
+                    Debug.WriteLine("Chosen: " + chosen[0]);
+                    workshops.WriteLine(lastPartNum + ", " + chosen[0]);
+                }
+                workshops.Close();
+            }
+            using (System.IO.StreamWriter participants = new System.IO.StreamWriter(dataFolder + participantsFile, true))
             {
                 participants.WriteLine(lastPartNum + ", " + conference + ", " + participantType + ", " + firstName + ", " + lastName + ", " + chaptNum);
                 lastPartNum++;
+                participants.Close();
             }
         }
 
@@ -148,6 +179,59 @@ namespace FBLA_Project
         {
             if (chaptNumTextBox.Text == "")
                 chaptNumTextBox.Text = "Chapter #";
+        }
+
+        private void workshopComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            workshopTextBox.Text = workshopDescList[workshopNameList.FindIndex(x => x.Contains(workshopComboBox.Text.Trim()))];
+            workshopDateTime.Text = "Date and Time: " + workshopList[workshopList.FindIndex(x => x.Contains(workshopComboBox.Text.Trim()))][4] + ", " + workshopList[workshopList.FindIndex(x => x.Contains(workshopComboBox.Text.Trim()))][5];
+            if (chosenWorkshopsList.Contains(workshopList[workshopList.FindIndex(x => x.Contains(workshopComboBox.Text))]))
+                workButton.Text = "Remove";
+            else
+                workButton.Text = "Add";
+        }
+
+        private void typeComboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void conferencesComboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void chaptNumTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void workButton_Click(object sender, EventArgs e)
+        {
+            if (workButton.Text == "Add")
+            {
+                Debug.WriteLine("Adding workshop");
+                if (workshopComboBox.Text != "Workshops" && !chosenWorkshopsList.Contains(workshopList[workshopList.FindIndex(x => x.Contains(workshopComboBox.Text))]))
+                {
+                    chosenWorkshopsList.Add(workshopList[workshopList.FindIndex(x => x.Contains(workshopComboBox.Text))]);
+                    chosenWorkBox.Items.Add(workshopComboBox.Text);
+                }
+                workButton.Text = "Remove";
+            }
+            else
+            {
+                Debug.WriteLine("Removing workshop");
+                if (chosenWorkshopsList.Contains(workshopList[workshopList.FindIndex(x => x.Contains(workshopComboBox.Text))]))
+                {
+                    Debug.WriteLine("Removing 2");
+                    chosenWorkshopsList.Remove(workshopList[workshopList.FindIndex(x => x.Contains(workshopComboBox.Text))]);
+                    chosenWorkBox.Items.Remove(workshopComboBox.Text);
+                }
+                workButton.Text = "Add";
+            }
         }
     }
 }
