@@ -1,6 +1,6 @@
 ﻿namespace FBLA_Project
 {
-    partial class mainForm
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.enterButton = new System.Windows.Forms.Button();
             this.firstNameTextBox = new System.Windows.Forms.TextBox();
             this.lastNameTextBox = new System.Windows.Forms.TextBox();
@@ -41,6 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.workButton = new System.Windows.Forms.Button();
             this.workshopDateTime = new System.Windows.Forms.Label();
+            this.reportsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // enterButton
@@ -51,7 +52,7 @@
             this.enterButton.TabIndex = 0;
             this.enterButton.Text = "Enter Information";
             this.enterButton.UseVisualStyleBackColor = true;
-            this.enterButton.Click += new System.EventHandler(this.button1_Click);
+            this.enterButton.Click += new System.EventHandler(this.enterButton_Click);
             // 
             // firstNameTextBox
             // 
@@ -165,11 +166,22 @@
             this.workshopDateTime.TabIndex = 12;
             this.workshopDateTime.Text = "Date and Time: ";
             // 
-            // mainForm
+            // reportsButton
+            // 
+            this.reportsButton.Location = new System.Drawing.Point(897, 427);
+            this.reportsButton.Name = "reportsButton";
+            this.reportsButton.Size = new System.Drawing.Size(75, 23);
+            this.reportsButton.TabIndex = 13;
+            this.reportsButton.Text = "Reports";
+            this.reportsButton.UseVisualStyleBackColor = true;
+            this.reportsButton.Click += new System.EventHandler(this.reportsButton_Click);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 462);
+            this.Controls.Add(this.reportsButton);
             this.Controls.Add(this.workshopDateTime);
             this.Controls.Add(this.workButton);
             this.Controls.Add(this.label1);
@@ -182,9 +194,12 @@
             this.Controls.Add(this.lastNameTextBox);
             this.Controls.Add(this.firstNameTextBox);
             this.Controls.Add(this.enterButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "mainForm";
-            this.Text = "FBLA Sign Up";
+            this.MaximizeBox = false;
+            this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "FBLA Registration";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,6 +219,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button workButton;
         private System.Windows.Forms.Label workshopDateTime;
+        private System.Windows.Forms.Button reportsButton;
     }
 }
 
