@@ -28,7 +28,7 @@ Notes:
 
 If the program detects that the formatting for a Data file is incorrect, it will remove the incorrectly formatted lines at startup
 
-All code can be viewed as text files in the TEXTCODE folder, or 
+All code can be viewed as text files in the TEXTCODE folder, or at https://github.com/cartycrabber/fblaConferenceRegistrationProject
 
 Program tested to work on Windows 7. Awaiting tests on other versions of Windows. Not compatible on Mac or Linux without 3rd party software
 
