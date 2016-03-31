@@ -4,6 +4,7 @@ fblaConferenceRegistrationProject
 FBLA Registration Project
 Created by Will Carty for the 2014 FBLA Desktop Application Programming competition
 Completed 1/30/14
+Won 3rd place
 
 Instructions:
 
